@@ -1,11 +1,27 @@
-# Pedimos al usuario que ingrese una lista de números separados por comas
-numeros_str = input("Ingresa una lista de números separados por comas: ")
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.siguiente = None
 
-# Convertimos la cadena de entrada en una lista de números
-numeros = [float(x) for x in numeros_str.split(",")]
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None
+        self.tamaño = 0
 
-# Calculamos el promedio de los números en la lista
-promedio = sum(numeros) / len(numeros)
+    def agregar(self, valor):
+        nuevo_nodo = Nodo(valor)
+        if self.cabeza is None:
+            self.cabeza = nuevo_nodo
+        else:
+            nodo_actual = self.cabeza
+            while nodo_actual.siguiente is not None:
+                nodo_actual = nodo_actual.siguiente
+            nodo_actual.siguiente = nuevo_nodo
+        self.tamaño += 1
 
-# Mostramos el promedio en pantalla
-print("El promedio es:", promedio)
+    def imprimir(self):
+        nodo_actual = self.cabeza
+        while nodo_actual is not None:
+            print(nodo_actual.valor, end=' ')
+            nodo_actual = nodo_actual.siguiente
+        print()
